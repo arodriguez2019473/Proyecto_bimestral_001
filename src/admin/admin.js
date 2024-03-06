@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import mongoose from 'mongoose';
 
 const AdminSchema = Schema ({
     
@@ -33,4 +33,10 @@ const AdminSchema = Schema ({
     }
 });
 
-module.exports = model('Admin', AdminSchema);
+AdminSchema.methods.toJSON = function(){
+    const { __v, password, _id, ...admin } = this.toObject();
+    admin.uid = _id;
+    return admin;
+}
+
+export default mongoose.model('Admin', AdminSchema);

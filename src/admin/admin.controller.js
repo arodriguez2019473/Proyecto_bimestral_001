@@ -1,104 +1,66 @@
-const bcryptjs = require('bcryptjs');
-const Admin = require('../models/admin');
-const { response } = require('express');
+import { response, request } from 'express';
+import bcryptjs from 'bcryptjs';
+import Admin from './admin.js'
 
-const adminsGet = async (req, res = response) => {
+export const adminsGet = async (req, res = response) => {
 
     const { limite, desde } = req.query;
     const query = { estado: true };
 
-    try {
-        const [total, admins] = await Promise.all([
-
-            Admin.countDocuments(query),
-            Admin.find(query).skip(Number(desde)).limit(Number(limite))
+    console [ total, admins ] = await Promise.all([
         
-        ]);
+        Admin.countDocuments(query),
+        Admin.find(query)
+        .skip(Number(desde))
+        .limit(Number(limite))
 
-        res.status(200).json({
+    ]);
 
-            total,
-            admins
-
-        });
-    } 
+}
     
-    catch (e) {
+export const getAdminById = async (req, res) => {
+    
+    const { id } = req.params;
+    const admin = await Admin.findOne({_d: id});
 
-        console.log(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
-};
+    res.status(200).json({
+        admin
+    });   
+}
 
-const getAdminById = async (req, res) => {
+export const adminDelete = async (req, res) => {
     const { id } = req.params;
 
-    try {
-        const admin = await Admin.findById(id);
-        res.status(200).json({
-            admin
-        });
+    const admin = await Admin.findByIdAndUpdate(id, { estado: false})
+    const adminautenticado = req.admin;
 
-    }
-
-    catch (e) {
-        console.log(e);
-
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
+    res.status(200).json({})
+    
 };
 
-const adminDelete = async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const admin = await Admin.findByIdAndUpdate(id, { estado: false });
-        res.status(200).json({
-            msg: 'El administrador ha sido eliminado exitosamente',
-            admin
-        });
-    } 
-
-    catch (e) {
-        console.log(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-
-    }
-};
-
-const putAdmin = async (req, res = response) => {
+export const putAdmin = async (req, res = response) => {
 
     const { id } = req.params;
     const { _id, password, correo, nombre, ...resto } = req.body;
 
-    try {
-        if (password) {
-            const salt = bcryptjs.genSaltSync();
-            resto.password = bcryptjs.hashSync(password, salt);
-        }
+    if(password) {
 
-        const admin = await Admin.findByIdAndUpdate(id, resto);
-        res.status(200).json({
-            msg: 'Administrador actualizado exitosamente',
-            admin
-        });
-    } 
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync(password, salt);
 
-    catch (e) {
-        console.log(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
+    await Admin.findByIdAndUpdate(id, resto);
+
+    const admin = await Admin.findOne({_id: id});
+
+    res.status(200).json({
+        msg: 'admin actualizado',
+        admin
+    })
     }
+
 };
 
-const adminPost = async (req, res) => {
+export const adminPost = async (req, res) => {
     
     const { nombre, correo, password } = req.body;
     const admin = new Admin({ nombre, correo, password });
@@ -108,26 +70,10 @@ const adminPost = async (req, res) => {
     const salt = bcryptjs.genSaltSync();
     admin.password = bcryptjs.hashSync(password, salt);
 
-    try {
-        await admin.save();
-        res.status(201).json({
-            admin
-        });
-    } 
+    await admin.save();
+
+    res.status(200).json({
+        admin
+    });
     
-    catch (e) {
-        console.log(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
-};
-
-module.exports = {
-    getAdminById,
-    adminsGet,
-    adminDelete,
-    putAdmin,
-    adminPost
-};
-
+}

@@ -27,8 +27,8 @@ const ProductoSchema = Schema ({
     
     disponible: {
     
-        type: Boolean,
-        default: true
+        type: String,
+        require: [true, 'se necesita saber si esta disponible']
     }
 });
 
