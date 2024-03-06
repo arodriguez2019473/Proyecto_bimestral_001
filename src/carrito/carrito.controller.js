@@ -35,21 +35,13 @@ const putCarrito = async (req, res = response) => {
     const { id } = req.params;
     const { nombre, cantidad, total, estado } = req.body;
 
-    if
-    
+    await Carrito.findByIdAndUpdate (id, resto);
+    const carrito = await Carrito.findOne({_id: id});
 
-    try {
-        const carrito = await Carrito.findByIdAndUpdate(id, { nombre, cantidad, total, estado }, { new: true });
-        res.status(200).json({
-            msg: 'Carrito actualizado exitosamente',
-            carrito
-        });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
+    res.status(200).json({
+        msg: 'carrito actualizado',
+        carrito
+    });
 };
 
 const carritoPost = async (req, res) => {

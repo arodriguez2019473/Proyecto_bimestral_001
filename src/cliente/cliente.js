@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
+import mongoose from "mongoose";
 
-const ClienteSchema = Schema ({
+const ClienteSchema = mongoose.Schema ({
 
     nombre: {
     
@@ -33,4 +33,11 @@ const ClienteSchema = Schema ({
     }
 });
 
-module.exports = model('Cliente', ClienteSchema);
+ClienteSchema.methods.toJSON = function(){
+    const { __v, password, _id, ...cliente} = this.toObject();
+    cliente.uid = _id;
+    return cliente
+}
+
+export default mongoose.model('Cliente', ClienteSchema);
+
