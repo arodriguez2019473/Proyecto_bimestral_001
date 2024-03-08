@@ -5,13 +5,20 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import { dbConnection } from './mongo.js';
+
 import adminRoutes from  '../src/admin/admin.routes.js';
+import clienteRoutes from  '../src/cliente/cliente.routes.js';
+import authRoutes from '../src/auth/auth.routes.js';
+import productoRoutes from '../src/producto/producto.routes.js'
 
 class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
-        this.adminPath = '/ventasOnline/admin'
+        this.adminPath = '/ventasOnline/v1/admin'
+        this.clientePath = '/ventasOnline/v1/cliente'
+        this.authPath = '/ventasOnline/v1/auth'
+        this.productoPath = '/ventasOnline/v1/producto'
 
         this.middlewares();
         this.conectarDB();
@@ -33,6 +40,9 @@ class Server{
     routes(){
 
         this.app.use(this.adminPath, adminRoutes);
+        this.app.use(this.clientePath, clienteRoutes);
+        this.app.use(this.authPath, authRoutes);
+        this.app.use(this.productoPath, productoRoutes);
 
     }
 

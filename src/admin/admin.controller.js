@@ -41,8 +41,8 @@ export const putAdmin = async (req, res = response) => {
 
 export const adminPost = async (req, res) => {
     
-    const { nombre, correo, password } = req.body;
-    const admin = new Admin({ nombre, correo, password });
+    const { nombre, correo, password, role } = req.body;
+    const admin = new Admin({ nombre, correo, password, role });
 
     admin.role = 'USER_ADMIN';
 
@@ -50,9 +50,7 @@ export const adminPost = async (req, res) => {
     admin.password = bcryptjs.hashSync(password, salt);
 
     await admin.save();
-
     res.status(200).json({
         admin
     });
-    
 }

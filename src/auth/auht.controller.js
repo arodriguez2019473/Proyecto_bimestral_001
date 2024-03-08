@@ -4,51 +4,42 @@ import Cliente from '../cliente/cliente.model.js';
 import Admin from '../admin/admin.model.js';
 
 export const login = async (req, res) => {
-    const { correo, password, rol } = req.body;
+    const { correo, password, role } = req.body;
 
     try {
         let usuario;
 
-        if (rol === 'USER_CLIENT') {
+        if (role === 'USER_CLIENT') {
             usuario = await Cliente.findOne({ correo });
-        } else if (rol === 'USER_ADMIN') {
+        } else if (role === 'USER_ADMIN') {
             usuario = await Admin.findOne({ correo });
         } else {
-            return res.status(400).json({
-                msg: "Rol de usuario no válido",
-            });
+            return res.status(400).json({ msg: "Rol no válido" });
         }
 
-       if (!usuario) {
-            return res.status(400).json({
-                msg: "Credenciales incorrectas, correo no existe en la base de datos",
-            });
+        if (!usuario) {
+            return res.status(400).json({ msg: "Credenciales incorrectas, correo no existe en la base de datos." });
         }
 
         if (!usuario.estado) {
-            return res.status(400).json({
-                msg: "El usuario no está activo",
-            });
+            return res.status(400).json({ msg: "El usuario no está activo en la base de datos." });
         }
 
-        const validPassword = bcryptjs.compareSync(password, usuario.password);
-        if (!validPassword) {
-            return res.status(400).json({
-                msg: "La contraseña es incorrecta",
-            });
+    const validarPassword = bcryptjs.compareSync(password, usuario.password);
+        if (!validarPassword) {
+            return res.status(400).json({ msg: "La contraseña es incorrecta" });
         }
 
-        const token = await generarJWT(usuario.id);
+    const token = await generarJWT(usuario.id, role);
 
         res.status(200).json({
-            msg: '¡Inicio de sesión exitoso!',
+            msg: "Inicio de sesión exitoso",
             usuario,
             token
         });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            msg: "Por favor, comuníquese con el administrador",
-        });
+
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ msg: "Error interno del servidor" });
     }
-}
+};

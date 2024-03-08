@@ -39,5 +39,6 @@ ClienteSchema.methods.toJSON = function(){
     return cliente
 }
 
+
 export default mongoose.model('Cliente', ClienteSchema);
 

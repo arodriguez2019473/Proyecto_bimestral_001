@@ -12,9 +12,9 @@ export const validarJWT = async (req, res, next) => {
     }
 
     try {
-        const { uid, rol } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
+        const { uid, role } = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
 
-        if (rol === 'USER_CLIENT') {
+        if (role === 'USER_CLIENT') {
             const cliente = await Cliente.findById(uid);
             if (!cliente) {
                 return res.status(401).json({
@@ -29,7 +29,7 @@ export const validarJWT = async (req, res, next) => {
             req.usuario = cliente;
         }
 
-        if (rol === 'USER_ADMIN') {
+        if (role === 'USER_ADMIN') {
             const admin = await Admin.findById(uid);
             if (!admin) {
                 return res.status(401).json({

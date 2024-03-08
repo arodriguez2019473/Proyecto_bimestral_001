@@ -23,7 +23,7 @@ const AdminSchema = mongoose.Schema ({
     role: {
     
         type: String,
-        default: "USER_ADMIN"
+        ref: "USER_ADMIN",
     },
     
     estado: {

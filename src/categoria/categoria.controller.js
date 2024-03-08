@@ -2,6 +2,9 @@ const { Schema, model } = require('mongoose');
 const Categoria = require('../models/categoria');
 const { response } = require('express');
 
+
+
+
 export const categoriasGet = async (req, res = response) => {
     const { limite , desde } = req.query;
     const query = { estado: 'activo' };

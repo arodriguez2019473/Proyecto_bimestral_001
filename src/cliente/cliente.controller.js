@@ -41,8 +41,8 @@ export const putCliente = async (req, res = response) => {
 
 export const clientePost = async (req, res) => {
     
-    const { nombre, correo, password } = req.body;
-    const cliente = new Cliente({ nombre, correo, password });
+    const { nombre, correo, password, role } = req.body;
+    const cliente = new Cliente({ nombre, correo, password, role });
 
     cliente.role = 'USER_CLIENT';
 
