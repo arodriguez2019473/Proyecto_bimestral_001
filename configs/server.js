@@ -10,6 +10,7 @@ import adminRoutes from  '../src/admin/admin.routes.js';
 import clienteRoutes from  '../src/cliente/cliente.routes.js';
 import authRoutes from '../src/auth/auth.routes.js';
 import productoRoutes from '../src/producto/producto.routes.js'
+import categoriaRoutes from '../src/categoria/categoria.routes.js'
 
 class Server{
     constructor(){
@@ -19,6 +20,7 @@ class Server{
         this.clientePath = '/ventasOnline/v1/cliente'
         this.authPath = '/ventasOnline/v1/auth'
         this.productoPath = '/ventasOnline/v1/producto'
+        this.categoriaPath = '/ventasOnline/v1/categoria'
 
         this.middlewares();
         this.conectarDB();
@@ -43,6 +45,7 @@ class Server{
         this.app.use(this.clientePath, clienteRoutes);
         this.app.use(this.authPath, authRoutes);
         this.app.use(this.productoPath, productoRoutes);
+        this.app.use(this.categoriaPath, categoriaRoutes);
 
     }
 

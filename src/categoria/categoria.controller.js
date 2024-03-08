@@ -1,10 +1,39 @@
-const { Schema, model } = require('mongoose');
-const Categoria = require('../models/categoria');
-const { response } = require('express');
+import { request,  response } from 'express';
+import bcryptjs from 'bcryptjs';
+import Categoria from './categoria.model.js'
+import Producto from '../producto/producto.model.js'
+
+export const categoriaPost = async (req, res = response) => {
+    try {
+        const { postId } = req.params;
+        const { nombre, descripcion, estado } = req.body;
+
+        const producto = await Producto.findById(postId);
+        if (!producto) {
+            return res.status(404).json({ error: "El producto no existe" });
+        }
+
+        const categoria = new Categoria({ 
+            nombre, 
+            descripcion, 
+            estado, 
+            producto: postId 
+        });
+
+        await categoria.save();
+
+        const productoActualizado = await Producto.findById(postId);
+
+        res.status(200).json({ categoria, producto: productoActualizado });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error al agregar la categoría" });
+    }
+};
 
 
 
-
+/*
 export const categoriasGet = async (req, res = response) => {
     const { limite , desde } = req.query;
     const query = { estado: 'activo' };
@@ -102,3 +131,4 @@ module.exports = {
     putCategoria,
     categoriaPost
 };
+*/
