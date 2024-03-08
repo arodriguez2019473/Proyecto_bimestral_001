@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const Categoria = require('../models/categoria');
 const { response } = require('express');
 
-const categoriasGet = async (req, res = response) => {
+export const categoriasGet = async (req, res = response) => {
     const { limite , desde } = req.query;
     const query = { estado: 'activo' };
 
@@ -24,7 +24,7 @@ const categoriasGet = async (req, res = response) => {
     }
 };
 
-const getCategoriaById = async (req, res) => {
+export const getCategoriaById = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -40,7 +40,7 @@ const getCategoriaById = async (req, res) => {
     }
 };
 
-const categoriaDelete = async (req, res) => {
+export const categoriaDelete = async (req, res) => {
     const { id } = req.params;
 
     try {

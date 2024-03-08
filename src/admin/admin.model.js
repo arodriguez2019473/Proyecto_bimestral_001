@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const AdminSchema = Schema ({
+const AdminSchema = mongoose.Schema ({
     
     nombre: {
     

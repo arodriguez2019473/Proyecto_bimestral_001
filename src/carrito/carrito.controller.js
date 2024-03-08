@@ -31,7 +31,7 @@ export const getCarritoById = async (req, res) => {
 };
 
 
-const putCarrito = async (req, res = response) => {
+export const putCarrito = async (req, res = response) => {
     const { id } = req.params;
     const { nombre, cantidad, total, estado } = req.body;
 
@@ -44,7 +44,7 @@ const putCarrito = async (req, res = response) => {
     });
 };
 
-const carritoPost = async (req, res) => {
+export const carritoPost = async (req, res) => {
     const { nombre, cantidad, total, estado } = req.body;
     const carrito = new Carrito({ nombre, cantidad, total, estado });
 
@@ -59,12 +59,4 @@ const carritoPost = async (req, res) => {
             msg: 'Error en el servidor'
         });
     }
-};
-
-module.exports = {
-    getCarritoById,
-    carritosGet,
-    carritoDelete,
-    putCarrito,
-    carritoPost
 };

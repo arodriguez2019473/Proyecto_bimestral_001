@@ -1,6 +1,6 @@
 import { response, request } from 'express';
 import bcryptjs from 'bcryptjs';
-import Admin from './admin.js'
+import Admin from './admin.model.js'
 
 export const adminsGet = async (req, res = response) => {
 
@@ -15,29 +15,8 @@ export const adminsGet = async (req, res = response) => {
         .limit(Number(limite))
 
     ]);
-
 }
     
-export const getAdminById = async (req, res) => {
-    
-    const { id } = req.params;
-    const admin = await Admin.findOne({_d: id});
-
-    res.status(200).json({
-        admin
-    });   
-}
-
-export const adminDelete = async (req, res) => {
-    const { id } = req.params;
-
-    const admin = await Admin.findByIdAndUpdate(id, { estado: false})
-    const adminautenticado = req.admin;
-
-    res.status(200).json({})
-    
-};
-
 export const putAdmin = async (req, res = response) => {
 
     const { id } = req.params;
