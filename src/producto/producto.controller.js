@@ -1,5 +1,6 @@
 import { response, request } from 'express';
 import Producto from './producto.model.js'
+import Categoria from '../categoria/categoria.model.js'
 
 export const productosGet = async (req = request, res = response) => {
 
@@ -44,29 +45,58 @@ export const productoDelete = async (req, res) => {
     });
 };
 
-export const putProducto = async (req, res = response) => {
+export const putProducto = async (req, res) => {
     const { id } = req.params;
     const { nombre, precio, descripcion, categoria, disponible } = req.body;
+
     try {
-        const producto = await Producto.findByIdAndUpdate(id, { nombre, precio, descripcion, categoria, disponible }, { new: true });
+        let cat = await Categoria.findOne({ categoria1: categoria });
+
+        if (!cat) {
+            if (!categoria) {
+                return res.status(400).json({ error: "El nombre de la categoría es obligatorio" });
+            }
+
+            cat = new Categoria({ categoria1: categoria });
+            await cat.save();
+        }
+
+        const producto = await Producto.findByIdAndUpdate(
+            id,
+            { nombre, precio, descripcion, categoria: cat._id, disponible },
+            { new: true }
+        );
+
         res.status(200).json({
             msg: 'Producto actualizado exitosamente',
             producto
         });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: 'Error en el servidor' });
     }
 };
 
 export const productoPost = async (req, res) => {
-    const { nombre, precio, descripcion, categoria, disponible } = req.body;
-    const producto = new Producto({ nombre, precio, descripcion, categoria, disponible });
 
-    await producto.save()
+    const { nombre, precio, descripcion, categoria, disponible } = req.body;
+
+    let cat = await Categoria.findOne({ categoria1: categoria });
+
+    if (!cat) {
+        if (!categoria) {
+            return res.status(400).json({ error: "El nombre de la categoría es obligatorio" });
+        }
+
+        cat = new Categoria({ categoria1: categoria });
+        await cat.save();
+    }
+
+    const producto = new Producto({ nombre, precio, descripcion, categoria: cat._id, disponible });
+
+    await producto.save();
+
     res.status(200).json({
         producto
-    })
+    });
 };

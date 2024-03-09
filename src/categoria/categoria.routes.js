@@ -13,9 +13,7 @@ router.post(
     '/:postId',
     [
         validarJWT,
-        check("nombre", "se debe agregar categoria").not().isEmpty(),
-        check("descripcion", 'es necesario la descripcion').not().isEmpty(),
-        check('estado',"es necesario el estado").not().isEmpty(),
+        check("categoria1", "se debe agregar categoria").not().isEmpty(),
         validarCampos,
     ],
     categoriaPost

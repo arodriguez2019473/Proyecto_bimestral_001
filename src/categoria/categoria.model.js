@@ -2,16 +2,10 @@ import mongoose from "mongoose";
 
 const CategoriaSchema = mongoose.Schema ({
 
-    nombre: {
+    categoria1: {
     
         type: String,
         required: [true, 'El nombre de la categoría es obligatorio']
-    },
-
-    descripcion: {
-    
-        type: String,
-        required: [true, 'La descripción de la categoría es obligatoria']
     },
     
     estado: {

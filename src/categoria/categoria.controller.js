@@ -1,42 +1,33 @@
 import { request,  response } from 'express';
-import bcryptjs from 'bcryptjs';
-import Categoria from './categoria.model.js'
-import Producto from '../producto/producto.model.js'
+import Categoria from './categoria.model.js';
 
-export const categoriaPost = async (req, res = response) => {
+export const categoriaPost = async (req = request, res = response) => {
     try {
-        const { postId } = req.params;
-        const { nombre, descripcion, estado } = req.body;
+        const { categoria1 } = req.body;
 
-        const producto = await Producto.findById(postId);
-        if (!producto) {
-            return res.status(404).json({ error: "El producto no existe" });
-        }
+        const newcat = new Categoria({ categoria1 });
 
-        const categoria = new Categoria({ 
-            nombre, 
-            descripcion, 
-            estado, 
-            producto: postId 
+        await newcat.save();
+
+        res.status(200).json({
+            categoria: newcat
         });
-
-        await categoria.save();
-
-        const productoActualizado = await Producto.findById(postId);
-
-        res.status(200).json({ categoria, producto: productoActualizado });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error al agregar la categoría" });
+        res.status(500).json({ error: "Error al crear la categoría" });
     }
 };
 
+export const categoriaDelete = async(req,res) =>{
+    console.log('categoriaDelete');
+    const {categoria} = req.query;
 
+
+
+
+
+}
 
 /*
-export const categoriasGet = async (req, res = response) => {
-    const { limite , desde } = req.query;
-    const query = { estado: 'activo' };
 
     try {
         const [total, categorias] = await Promise.all([
