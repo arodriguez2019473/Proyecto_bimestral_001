@@ -1,5 +1,7 @@
 import { request,  response } from 'express';
 import Categoria from './categoria.model.js';
+import { ExpressValidator } from 'express-validator';
+import Producto from '../producto/producto.model.js'
 
 export const categoriaPost = async (req = request, res = response) => {
     try {
@@ -17,109 +19,78 @@ export const categoriaPost = async (req = request, res = response) => {
     }
 };
 
-export const categoriaDelete = async(req,res) =>{
-    console.log('categoriaDelete');
-    const {categoria} = req.query;
-
-
-
-
-
-}
-
-/*
+export const categoriaGet = async (req, res) => {
+    
+    const { limite, desde } = req.query;
+    const query = { estado: true };
 
     try {
         const [total, categorias] = await Promise.all([
+
             Categoria.countDocuments(query),
-            Categoria.find(query).skip(Number(desde)).limit(Number(limite))
+            Categoria.find(query)
+                .skip(Number(desde))
+                .limit(Number(limite))
         ]);
+
+        const categoriasConProductos = await Promise.all(categorias.map(async (categoria) => {
+
+            const productos = await Producto.find({ categoria: categoria._id });
+            return {
+                categoria,
+                productos
+            };
+
+        }));
 
         res.status(200).json({
             total,
-            categorias
+            categorias: categoriasConProductos
         });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
+    } 
+    catch (error) {
+        res.status(500).json({ error: "Error al obtener las categorías y sus productos" });
     }
 };
 
-export const getCategoriaById = async (req, res) => {
-    const { id } = req.params;
 
-    try {
-        const categoria = await Categoria.findById(id);
-        res.status(200).json({
-            categoria
-        });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
-};
 
 export const categoriaDelete = async (req, res) => {
-    const { id } = req.params;
+    console.log('categoriaDelete');
+    const { categoria } = req.query;
+
+    if (!categoria) {
+        return res.status(400).json({
+            msg: "Categoría no existe, vuelve a ingresar el query"
+        });
+    }
 
     try {
-        const categoria = await Categoria.findByIdAndUpdate(id, { estado: 'inactivo' });
+        const p = producto;
+        const cat = await Categoria.findById(categoria);
+
+        if (!p) {
+            cat.estado = false;
+            await cat.save();
+            
+            return res.status(200).json({
+                msg: "Categoría eliminada",
+                categoria: cat
+            });
+        }
+
+        cat.estado = false;
+        p.categoria = 'Categoría eliminada';
+
+        await Producto.findByIdAndUpdate(p.id.p, { categoria: 'Categoría eliminada' });
+        await cat.save();
+
         res.status(200).json({
-            msg: 'La categoría ha sido eliminada exitosamente',
-            categoria
+            msg: "Categoría eliminada",
+            categoria: cat,
+            producto: p
         });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
+    } catch (error) {
+        res.status(500).json({ error: "Error al eliminar la categoría" });
     }
 };
-
-const putCategoria = async (req, res = response) => {
-    const { id } = req.params;
-    const { nombre, descripcion } = req.body;
-
-    try {
-        const categoria = await Categoria.findByIdAndUpdate(id, { nombre, descripcion }, { new: true });
-        res.status(200).json({
-            msg: 'Categoría actualizada exitosamente',
-            categoria
-        });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
-};
-
-const categoriaPost = async (req, res) => {
-    const { nombre, descripcion } = req.body;
-    const categoria = new Categoria({ nombre, descripcion });
-
-    try {
-        await categoria.save();
-        res.status(201).json({
-            categoria
-        });
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
-};
-
-module.exports = {
-    getCategoriaById,
-    categoriasGet,
-    categoriaDelete,
-    putCategoria,
-    categoriaPost
-};
-*/

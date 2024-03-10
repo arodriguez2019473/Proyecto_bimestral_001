@@ -9,10 +9,9 @@ const CategoriaSchema = mongoose.Schema ({
     },
     
     estado: {
-    
-        type: String,
-        enum: ["activo", "inactivo"],
-        default: "activo"
+
+    type: Boolean,
+    default: true       
     }
     
 });
