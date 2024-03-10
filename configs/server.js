@@ -11,16 +11,19 @@ import clienteRoutes from  '../src/cliente/cliente.routes.js';
 import authRoutes from '../src/auth/auth.routes.js';
 import productoRoutes from '../src/producto/producto.routes.js'
 import categoriaRoutes from '../src/categoria/categoria.routes.js'
+import carritoRoutes from '../src/carrito/carrito.routes.js'
 
 class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+
         this.adminPath = '/ventasOnline/v1/admin'
         this.clientePath = '/ventasOnline/v1/cliente'
         this.authPath = '/ventasOnline/v1/auth'
         this.productoPath = '/ventasOnline/v1/producto'
         this.categoriaPath = '/ventasOnline/v1/categoria'
+        this.carritoPath = '/ventasOnline/v1/carrito'
 
         this.middlewares();
         this.conectarDB();
@@ -46,6 +49,7 @@ class Server{
         this.app.use(this.authPath, authRoutes);
         this.app.use(this.productoPath, productoRoutes);
         this.app.use(this.categoriaPath, categoriaRoutes);
+        this.app.use(this.carritoPath, carritoRoutes);
 
     }
 

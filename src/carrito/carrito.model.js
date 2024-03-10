@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const CarritoSchema = Schema ({
+const CarritoSchema = mongoose.Schema ({
 
     nombre:{
         type: String,
@@ -12,7 +12,7 @@ const CarritoSchema = Schema ({
         require: [true, 'el carrito debe tener almenos 1 producto']
     },
 
-    total:{
+    precio:{
         type: String,
         default: 0
     },
