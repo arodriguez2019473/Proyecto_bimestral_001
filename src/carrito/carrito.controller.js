@@ -44,52 +44,22 @@ export const putCarrito = async (req, res = response) => {
         carrito
     });
 };
-/*
-export const carritoPost = async (req, res) => {
-    const { nombre, cantidad, total, estado } = req.body;
 
-    try {
-        const productoExistente = await Carrito.findOne({ nombre });
-
-        if (productoExistente) {
-            return res.status(400).json({
-                msg: 'El producto ya está en el carrito'
-            });
-        }
-
-        const carrito = new Carrito({ nombre, cantidad, total, estado });
-        await carrito.save();
-
-        res.status(201).json({
-            msg: 'Producto agregado al carrito',
-            carrito
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            msg: 'Error en el servidor'
-        });
-    }
-};
-*/
 
 export const carritoPost = async (req, res) => {
     const { nombre, cantidad } = req.body;
 
     try {
-        // Verificar si el producto existe
         const producto = await Producto.findOne({ nombre });
         if (!producto) {
             return res.status(404).json({ msg: 'El producto no existe' });
         }
 
-        // Verificar si el producto ya está en el carrito
         const productoExistente = await Carrito.findOne({ nombre });
         if (productoExistente) {
             return res.status(400).json({ msg: 'El producto ya está en el carrito' });
         }
 
-        // Crear el objeto para el carrito
         const nuevoProductoEnCarrito = new Carrito({
             nombre: producto.nombre,
             cantidad: cantidad,
