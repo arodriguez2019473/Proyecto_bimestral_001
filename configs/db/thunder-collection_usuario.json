@@ -1,0 +1,68 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "usuario",
+    "dateExported": "2024-03-11T05:20:25.532Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "402582db-0aa2-4f2d-85da-9b305eb2dcd2",
+            "colId": "8fa65c0e-4673-44cd-9b88-7126f9204d17",
+            "containerId": "",
+            "name": "Ver_Productos",
+            "url": "http://localhost:3000/ventasOnline/v1/producto/",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-03-10T19:30:39.564Z",
+            "modified": "2024-03-10T19:30:39.564Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhY2Y5YmExNmUwNmY2MDYxNWE4MzUiLCJpYXQiOjE3MDk4OTE0NDgsImV4cCI6MTcwOTg5NTA0OH0.PM5rd9L-ZBXKEL_NYAoMxN7yVT5UY2uFsPAf--Xy3t4"
+                }
+            ],
+            "params": [],
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "dbf2f758-672f-4726-9f7e-25c5f2367f00",
+            "colId": "8fa65c0e-4673-44cd-9b88-7126f9204d17",
+            "containerId": "",
+            "name": "carrito",
+            "url": "http://localhost:3000/ventasOnline/v1/carrito",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-10T22:35:08.085Z",
+            "modified": "2024-03-10T23:15:51.666Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\":\"cocos\",\n  \"cantidad\":\"1\"\n  \n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ca749a36-24d2-4885-81a1-12fbe808981e",
+            "colId": "8fa65c0e-4673-44cd-9b88-7126f9204d17",
+            "containerId": "",
+            "name": "Ver_Productos_Id",
+            "url": "http://localhost:3000/ventasOnline/v1/producto/65ece28977d70aa6a322d29d",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-03-10T19:30:42.890Z",
+            "modified": "2024-03-10T19:30:42.890Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhY2Y5YmExNmUwNmY2MDYxNWE4MzUiLCJpYXQiOjE3MDk4OTE0NDgsImV4cCI6MTcwOTg5NTA0OH0.PM5rd9L-ZBXKEL_NYAoMxN7yVT5UY2uFsPAf--Xy3t4"
+                }
+            ],
+            "params": [],
+            "reqType": "get",
+            "tests": []
+        }
+    ]
+}

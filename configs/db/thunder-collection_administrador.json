@@ -1,0 +1,144 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "administrador",
+    "dateExported": "2024-03-11T05:20:17.010Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "8e755253-3df0-493f-a86f-0eaf8adaf72a",
+            "colId": "96784fc3-0732-4ea3-9dc2-6216bf6f4aba",
+            "containerId": "",
+            "name": "agregar categorias",
+            "url": "http://localhost:3000/ventasOnline/v1/categoria/65eae1d6a1ac60db92dec507",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-10T19:30:30.846Z",
+            "modified": "2024-03-10T22:43:12.136Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVlMzczMTgxZWQ2M2FiNWY0ZTkwOTkiLCJpYXQiOjE3MTAxMTA1MzUsImV4cCI6MTcxMDExNDEzNX0.m3JJsn7Jw2cgbSrnFHKshozWdVHGVbfAUTjcRTepIDo"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"categoria1\": \"carnes\"\n}\n",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "84b53cf1-97ab-48ff-835f-fb256f015a4a",
+            "colId": "96784fc3-0732-4ea3-9dc2-6216bf6f4aba",
+            "containerId": "",
+            "name": "delete",
+            "url": "http://localhost:3000/ventasOnline/v1/categoria/65ee15390e998f293814a4c4",
+            "method": "DELETE",
+            "sortNum": 12500,
+            "created": "2024-03-10T20:10:22.710Z",
+            "modified": "2024-03-10T20:22:04.127Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhY2Y5YmExNmUwNmY2MDYxNWE4MzUiLCJpYXQiOjE3MTAwOTkxNTAsImV4cCI6MTcxMDEwMjc1MH0.z2dBt9Z-KoSeu_zX00z_VYTNxMIOja7r9Z9QoVzFV8A"
+                }
+            ],
+            "params": [],
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "643c2e78-afd7-4143-b80f-676d5b388f06",
+            "colId": "96784fc3-0732-4ea3-9dc2-6216bf6f4aba",
+            "containerId": "",
+            "name": "Ver categorias",
+            "url": "http://localhost:3000/ventasOnline/v1/categoria",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2024-03-10T19:31:26.325Z",
+            "modified": "2024-03-10T19:56:55.808Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhY2Y5YmExNmUwNmY2MDYxNWE4MzUiLCJpYXQiOjE3MTAwMjE0NjQsImV4cCI6MTcxMDAyNTA2NH0.HtGYtengXBn_SOJ_9p_XurS2ez9P96TRetfMirs4XgU"
+                }
+            ],
+            "params": [],
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "4b94bb97-69e8-456b-a710-cb6202f72a51",
+            "colId": "96784fc3-0732-4ea3-9dc2-6216bf6f4aba",
+            "containerId": "",
+            "name": "ProductoNew",
+            "url": "http://localhost:3000/ventasOnline/v1/producto",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-10T19:30:34.014Z",
+            "modified": "2024-03-10T21:49:15.995Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhY2Y5YmExNmUwNmY2MDYxNWE4MzUiLCJpYXQiOjE3MTAxMDcyNDEsImV4cCI6MTcxMDExMDg0MX0.oWqDp5q-fdckXWV_fXtc8rZfjXHt-wvqgZVz7YVS2qA"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\": \"cerdo\",\n  \"precio\": 10.00,\n  \"descripcion\": \"es de vaca\",\n  \"categoria\":\"lacteos\",\n  \"disponible\": 5\n}\n",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        },
+        {
+            "_id": "eab25ec6-00eb-4676-adde-a97f02ccd511",
+            "colId": "96784fc3-0732-4ea3-9dc2-6216bf6f4aba",
+            "containerId": "",
+            "name": "Editar_Productos",
+            "url": "http://localhost:3000/ventasOnline/v1/producto/65ece28977d70aa6a322d29d",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-03-10T19:30:46.159Z",
+            "modified": "2024-03-10T19:30:46.159Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhY2Y5YmExNmUwNmY2MDYxNWE4MzUiLCJpYXQiOjE3MDk4OTE0NDgsImV4cCI6MTcwOTg5NTA0OH0.PM5rd9L-ZBXKEL_NYAoMxN7yVT5UY2uFsPAf--Xy3t4"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nombre\": \"Carne\",\n  \"precio\": 15.99,\n  \"descripcion\": \"carne de vaca\",\n  \"categoria\": \"carne\",\n  \"disponible\": 2\n}\n",
+                "form": []
+            },
+            "reqType": "put",
+            "tests": []
+        },
+        {
+            "_id": "7922090e-c550-4261-b621-d51b78951045",
+            "colId": "96784fc3-0732-4ea3-9dc2-6216bf6f4aba",
+            "containerId": "",
+            "name": "Eliminar_Productos",
+            "url": "http://localhost:3000/ventasOnline/v1/producto/65eae1d6a1ac60db92dec507",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-03-10T19:30:49.612Z",
+            "modified": "2024-03-10T19:30:49.612Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWVhY2Y5YmExNmUwNmY2MDYxNWE4MzUiLCJpYXQiOjE3MDk4OTUwMTAsImV4cCI6MTcwOTg5ODYxMH0.11VAE4cERAxI6cDnlkGSYi9erLE9ipX-m3jBbVgt5Pw"
+                }
+            ],
+            "params": [],
+            "reqType": "get",
+            "tests": []
+        }
+    ]
+}
